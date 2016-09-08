@@ -20,6 +20,7 @@ public class CookieSolutionsAPITest {
     private CookieRepository cookieRepository;
 
     private OrderRepository orderRepository;
+    private CookieService cookieService;
 
     @Mock
     private Store store;
@@ -28,6 +29,7 @@ public class CookieSolutionsAPITest {
     public void setup() {
         cookieRepository = new CookieRepository();
         orderRepository = new OrderRepository(store);
+        cookieService = new CookieService();
     }
 
     @Test
@@ -57,11 +59,12 @@ public class CookieSolutionsAPITest {
         List<Cookie> cookies = new ArrayList<>();
         CookieOrder cookieOrder = new CookieOrder();
         Address address = new Address();
-        cookieOrder.put(cookie);
-        cookieOrder.put(cookies);
+        cookieOrder.add(cookie);
         cookieOrder.setAddress(address);
         cookieOrder.setDeliveryDate(new Date());
-        String orderNumber = serviceClass.placeOrder(cookieOrder);
+        cookieOrder.setNote("");
+        String orderNumber = cookieService.placeOrder(cookieOrder);
+        Assertions.assertThat(orderNumber).isNotEmpty();
         //assert
         // test 201?
     }
