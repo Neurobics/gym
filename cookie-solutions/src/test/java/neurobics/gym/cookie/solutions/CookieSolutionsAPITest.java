@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CookieSolutionsAPITest {
@@ -70,7 +71,42 @@ public class CookieSolutionsAPITest {
 
     @Test
     public void fetchOrder_validOrderNumber_returnsOrder() {
-//        Assume.th
+        CookieOrder cookieOrder = prepareCookieOrder();
+        String orderNumber = assumeOrderExists(cookieOrder);
+
+        CookieOrder order = cookieService.fetchOrder(orderNumber);
+        Assertions.assertThat(order).isNotNull().isEqualTo(cookieOrder);
+    }
+
+    @Test
+    public void fetchOrder_nonExistentOrderNumber_returnsEmptyOptional() {
+        CookieOrder order = cookieService.fetchOrder("123");
+        Assertions.assertThat(order).isNotNull().isEqualTo(Optional.empty());
+    }
+    /**
+     *
+     *
+     * someStorage <= is a spy
+     *
+     *
+     * cookieService = cookieService.injectDeps(someStorage)
+     * ====
+     *
+     *
+     *
+     * cookieService.fetchOrder(orderNumber);
+     * someStorage.getById.calledWith(orderNumber)
+     *
+     *
+     *
+     * cookieService.createOrder(orderNumber);
+     * someStorage.persist.calledWith(orderNumber)
+     *
+     * @return
+     */
+
+    private CookieOrder prepareCookieOrder() {
+        return prepareCookieOrder(new Address(), new Cookie(null, null));
     }
 
     private CookieOrder prepareCookieOrder(Address address, Cookie... cookies) {
@@ -80,5 +116,11 @@ public class CookieSolutionsAPITest {
         cookieOrder.setDeliveryDate(new Date());
         cookieOrder.setNote("");
         return cookieOrder;
+    }
+
+    private String assumeOrderExists(CookieOrder cookieOrder) {
+        String orderNumber = cookieService.placeOrder(prepareCookieOrder());
+        Assume.assumeNotNull(orderNumber);
+        return orderNumber;
     }
 }
