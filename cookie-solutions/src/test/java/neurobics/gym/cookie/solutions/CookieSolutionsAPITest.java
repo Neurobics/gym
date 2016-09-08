@@ -3,13 +3,16 @@ package neurobics.gym.cookie.solutions;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CookieSolutionsAPITest {
 
     private CookieRepository cookieRepository;
@@ -42,6 +45,15 @@ public class CookieSolutionsAPITest {
         orderRepository.create(cookieOrder);
 
         Mockito.verify(store.persist(cookieOrder));
+    }
+
+    @Test
+    public void api_postOrder() {
+        // setup
+        // sut
+        api.
+        //assert
+        // test 201?
     }
 
 
