@@ -10,6 +10,7 @@ import spark.Spark;
  *      Array of cookies
  *      Address details
  *      Notes
+ *      Delivery date
  *      (Pay on delivery or payment details)
  *      State
  */

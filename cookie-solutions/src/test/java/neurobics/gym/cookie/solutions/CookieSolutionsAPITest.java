@@ -5,15 +5,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 public class CookieSolutionsAPITest {
 
     private CookieRepository cookieRepository;
 
+    private OrderRepository orderRepository;
+    private Store store;
+
     @Before
     public void setup() {
         cookieRepository = new CookieRepository();
+        orderRepository = new OrderRepository(store);
     }
 
     @Test
@@ -27,7 +32,10 @@ public class CookieSolutionsAPITest {
     }
 
     // TEST: Post order with cookies that we need to order.
-
+    public void cookieRepository_createOrder() {
+        HashMap<Cookie, Integer> cookieOrder = new HashMap<>();
+        orderRepository.create(cookieOrder);
+    }
 
 
 
