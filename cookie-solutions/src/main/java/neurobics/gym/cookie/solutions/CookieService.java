@@ -8,6 +8,12 @@ import java.util.UUID;
 public class CookieService {
 
     public String placeOrder(CookieOrder cookieOrder) {
+        if (cookieOrder == null) {
+            throw new IllegalArgumentException();
+        }
+        if (cookieOrder.getCookies() == null || cookieOrder.getCookies().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         return UUID.randomUUID().toString();
     }
 

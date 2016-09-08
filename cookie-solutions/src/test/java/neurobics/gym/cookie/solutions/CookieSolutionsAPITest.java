@@ -5,13 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,33 +39,44 @@ public class CookieSolutionsAPITest {
                 new Cookie("lemon", new BigDecimal(1)));
     }
 
-    // TEST: Post order with cookies that we need to order.
     @Test
-    public void cookieRepository_createOrder() {
-        HashMap<Cookie, Integer> cookieOrder = new HashMap<>();
-        orderRepository.create(cookieOrder);
-
-        Mockito.verify(store.persist(cookieOrder));
-    }
-
-    @Test
-    public void api_postOrder() {
+    public void api_postOrder_success() {
         // setup
         // sut
         Cookie cookie = new Cookie(null,null);
-        List<Cookie> cookies = new ArrayList<>();
-        CookieOrder cookieOrder = new CookieOrder();
         Address address = new Address();
-        cookieOrder.add(cookie);
-        cookieOrder.setAddress(address);
-        cookieOrder.setDeliveryDate(new Date());
-        cookieOrder.setNote("");
+        CookieOrder cookieOrder = prepareCookieOrder(address, cookie, cookie);
         String orderNumber = cookieService.placeOrder(cookieOrder);
         Assertions.assertThat(orderNumber).isNotEmpty();
         //assert
         // test 201?
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void api_noCookies_throwsException() {
+        Address address = new Address();
+        CookieOrder cookieOrder = prepareCookieOrder(address);
+        cookieService.placeOrder(cookieOrder);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void api_nullOrder_throwsException() {
+        CookieOrder cookieOrder = null;
+        cookieService.placeOrder(cookieOrder);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void api_nullAddress_throwsException() {
+        CookieOrder cookieOrder = null;
+        cookieService.placeOrder(cookieOrder);
+    }
+
+    private CookieOrder prepareCookieOrder(Address address, Cookie... cookies) {
+        CookieOrder cookieOrder = new CookieOrder();
+        cookieOrder.add(cookies);
+        cookieOrder.setAddress(address);
+        cookieOrder.setDeliveryDate(new Date());
+        cookieOrder.setNote("");
+        return cookieOrder;
+    }
 }
