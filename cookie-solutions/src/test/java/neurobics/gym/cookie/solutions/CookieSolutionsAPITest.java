@@ -1,6 +1,7 @@
 package neurobics.gym.cookie.solutions;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,35 +41,36 @@ public class CookieSolutionsAPITest {
     }
 
     @Test
-    public void api_postOrder_success() {
-        // setup
-        // sut
-        Cookie cookie = new Cookie(null,null);
+    public void placeOrder_postOrder_success() {
+        Cookie cookie = new Cookie(null, null);
         Address address = new Address();
         CookieOrder cookieOrder = prepareCookieOrder(address, cookie, cookie);
         String orderNumber = cookieService.placeOrder(cookieOrder);
         Assertions.assertThat(orderNumber).isNotEmpty();
-        //assert
-        // test 201?
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void api_noCookies_throwsException() {
+    public void placeOrder_noCookies_throwsException() {
         Address address = new Address();
         CookieOrder cookieOrder = prepareCookieOrder(address);
         cookieService.placeOrder(cookieOrder);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void api_nullOrder_throwsException() {
+    public void placeOrder_nullOrder_throwsException() {
         CookieOrder cookieOrder = null;
         cookieService.placeOrder(cookieOrder);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void api_nullAddress_throwsException() {
-        CookieOrder cookieOrder = null;
+    public void placeOrder_nullAddress_throwsException() {
+        CookieOrder cookieOrder = prepareCookieOrder(null, new Cookie(null,null));
         cookieService.placeOrder(cookieOrder);
+    }
+
+    @Test
+    public void fetchOrder_validOrderNumber_returnsOrder() {
+//        Assume.th
     }
 
     private CookieOrder prepareCookieOrder(Address address, Cookie... cookies) {

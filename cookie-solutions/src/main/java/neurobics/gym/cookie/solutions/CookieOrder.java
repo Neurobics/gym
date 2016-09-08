@@ -32,4 +32,8 @@ public class CookieOrder {
     public List<Cookie> getCookies() {
         return cookies;
     }
+
+    public Address getAddress() {
+        return address;
+    }
 }
