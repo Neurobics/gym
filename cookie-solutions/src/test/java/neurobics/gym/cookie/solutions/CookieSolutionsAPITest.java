@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,7 +53,15 @@ public class CookieSolutionsAPITest {
     public void api_postOrder() {
         // setup
         // sut
-        api.
+        Cookie cookie = new Cookie(null,null);
+        List<Cookie> cookies = new ArrayList<>();
+        CookieOrder cookieOrder = new CookieOrder();
+        Address address = new Address();
+        cookieOrder.put(cookie);
+        cookieOrder.put(cookies);
+        cookieOrder.setAddress(address);
+        cookieOrder.setDeliveryDate(new Date());
+        String orderNumber = serviceClass.placeOrder(cookieOrder);
         //assert
         // test 201?
     }
