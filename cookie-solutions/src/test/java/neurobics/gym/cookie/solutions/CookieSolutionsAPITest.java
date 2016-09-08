@@ -3,6 +3,8 @@ package neurobics.gym.cookie.solutions;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -13,6 +15,8 @@ public class CookieSolutionsAPITest {
     private CookieRepository cookieRepository;
 
     private OrderRepository orderRepository;
+
+    @Mock
     private Store store;
 
     @Before
@@ -32,9 +36,12 @@ public class CookieSolutionsAPITest {
     }
 
     // TEST: Post order with cookies that we need to order.
+    @Test
     public void cookieRepository_createOrder() {
         HashMap<Cookie, Integer> cookieOrder = new HashMap<>();
         orderRepository.create(cookieOrder);
+
+        Mockito.verify(store.persist(cookieOrder));
     }
 
 
