@@ -41,9 +41,12 @@ import org.junit.Test;
  */
 public class HarryPotterTest {
 
+
     @Test
     public void eatingSession() {
-        double actual = new FlourishAndBlotts().buy(1);
+        Basket basket = new Basket();
+        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 1);
+        double actual = new FlourishAndBlotts().buy(basket);
         double expected = 8;
         Assert.assertEquals(expected, actual, 0.001);
     }
@@ -54,6 +57,21 @@ public class HarryPotterTest {
         basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 2);
         double actual = new FlourishAndBlotts().buy(basket);
         double expected = 15.2;
+        Assert.assertEquals(expected, actual, 0.001);
+    }
+
+    @Test
+    public void testExample() {
+        Basket basket = new Basket();
+        basket.put(HarryPotterBook.PHILOSPHERS_STONE, 2);
+        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 2);
+        basket.put(HarryPotterBook.PRISONER_OF_AZKABAN, 2);
+        basket.put(HarryPotterBook.GOBLET_OF_FIRE, 1);
+        basket.put(HarryPotterBook.ORDER_OF_THE_PHOENIX, 1);
+
+        double actual = new FlourishAndBlotts().buy(basket);
+        double expected = 51.60;
+
         Assert.assertEquals(expected, actual, 0.001);
     }
 

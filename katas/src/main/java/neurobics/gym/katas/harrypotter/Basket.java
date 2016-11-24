@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author <a href="mailto:mail@kylepullicino.com">Kyle</a>
- */
 public class Basket {
     public Set<HarryPotterBook> keySet() {
         return books.keySet();
