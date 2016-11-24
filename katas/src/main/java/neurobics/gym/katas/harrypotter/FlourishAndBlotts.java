@@ -1,5 +1,6 @@
 package neurobics.gym.katas.harrypotter;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,9 +31,10 @@ public class FlourishAndBlotts {
 
         Map<HarryPotterBook, Integer> newMap = basket.entrySet()
                 .stream()
+                .map(harryPotterBookIntegerEntry -> new HashMap.SimpleEntry<>(harryPotterBookIntegerEntry.getKey(), harryPotterBookIntegerEntry.getValue() - kemmIlSetGhaqqadna))
                 .filter(harryPotterBookIntegerEntry1 -> harryPotterBookIntegerEntry1.getValue() > kemmIlSetGhaqqadna)
                 .collect(Collectors.toMap(Map.Entry::getKey,
-                        harryPotterBookIntegerEntry -> harryPotterBookIntegerEntry.getValue() - kemmIlSetGhaqqadna));
+                        AbstractMap.SimpleEntry::getValue));
 
         return ((8 * 5) - ((8 * 5) * .25)) + ((8 * 3) - (8 * 3) * .1);
     }
