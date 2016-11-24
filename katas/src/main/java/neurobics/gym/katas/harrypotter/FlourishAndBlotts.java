@@ -1,12 +1,14 @@
 package neurobics.gym.katas.harrypotter;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FlourishAndBlotts {
 
 
     private static final HashMap<Integer, Double> DISCOUNT_MAP = new HashMap<>();
+
     static {
         DISCOUNT_MAP.put(1, 0.0);
         DISCOUNT_MAP.put(2, 0.05);
@@ -26,7 +28,11 @@ public class FlourishAndBlotts {
         double subtotal = 8 * numberOfDifferentBooks * kemmIlSetGhaqqadna * DISCOUNT_MAP.get(numberOfDifferentBooks);
 
 
-        basket.entrySet().stream().collect(Collectors.toMap(harryPotterBookIntegerEntry -> ));
+        Map<HarryPotterBook, Integer> newMap = basket.entrySet()
+                .stream()
+                .filter(harryPotterBookIntegerEntry1 -> harryPotterBookIntegerEntry1.getValue() > kemmIlSetGhaqqadna)
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        harryPotterBookIntegerEntry -> harryPotterBookIntegerEntry.getValue() - kemmIlSetGhaqqadna));
 
         return ((8 * 5) - ((8 * 5) * .25)) + ((8 * 3) - (8 * 3) * .1);
     }
