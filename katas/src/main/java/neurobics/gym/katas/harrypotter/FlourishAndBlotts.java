@@ -6,6 +6,7 @@ package neurobics.gym.katas.harrypotter;
 public class FlourishAndBlotts {
 
     public double buy(Basket basket) {
+        basket.keySet().size();
         if (basket == 1) {
             return 8.0;
         } else if (basket == 2) {

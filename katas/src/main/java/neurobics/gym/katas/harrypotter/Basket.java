@@ -2,11 +2,19 @@ package neurobics.gym.katas.harrypotter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:mail@kylepullicino.com">Kyle</a>
  */
 public class Basket {
+    public Set<HarryPotterBook> keySet() {
+        return books.keySet();
+    }
+
+    public Set<Map.Entry<HarryPotterBook, Integer>> entrySet() {
+        return books.entrySet();
+    }
 
     private final Map<HarryPotterBook, Integer> books;
 
