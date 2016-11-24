@@ -43,7 +43,7 @@ public class HarryPotterTest {
 
 
     @Test
-    public void eatingSession() {
+    public void oneBook() {
         Basket basket = new Basket();
         basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 1);
         double actual = new FlourishAndBlotts().buy(basket);
@@ -52,13 +52,43 @@ public class HarryPotterTest {
     }
 
     @Test
-    public void chamberOfSecrets() {
+    public void twoBooks() {
         Basket basket = new Basket();
-        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 2);
+        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 1);
+        basket.put(HarryPotterBook.GOBLET_OF_FIRE, 1);
         double actual = new FlourishAndBlotts().buy(basket);
         double expected = 15.2;
         Assert.assertEquals(expected, actual, 0.001);
     }
+
+
+    @Test
+    public void allUnique() {
+        Basket basket = new Basket();
+        basket.put(HarryPotterBook.PHILOSPHERS_STONE, 1);
+        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 1);
+        basket.put(HarryPotterBook.PRISONER_OF_AZKABAN, 1);
+        basket.put(HarryPotterBook.GOBLET_OF_FIRE, 1);
+        basket.put(HarryPotterBook.ORDER_OF_THE_PHOENIX, 1);
+        double actual = new FlourishAndBlotts().buy(basket);
+        double expected = 30.0;
+        Assert.assertEquals(expected, actual, 0.001);
+    }
+
+    @Test
+    public void allUniqueAllUnique() {
+        Basket basket = new Basket();
+        basket.put(HarryPotterBook.PHILOSPHERS_STONE, 2);
+        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 2);
+        basket.put(HarryPotterBook.PRISONER_OF_AZKABAN, 2);
+        basket.put(HarryPotterBook.GOBLET_OF_FIRE, 2);
+        basket.put(HarryPotterBook.ORDER_OF_THE_PHOENIX, 2);
+        double actual = new FlourishAndBlotts().buy(basket);
+        double expected = 60.0;
+        Assert.assertEquals(expected, actual, 0.001);
+    }
+
+
 
     @Test
     public void testExample() {

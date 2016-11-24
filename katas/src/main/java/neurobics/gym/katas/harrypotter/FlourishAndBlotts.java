@@ -19,24 +19,26 @@ public class FlourishAndBlotts {
     }
 
     public double buy(Basket basket) {
-//        basket
-//        basket.entrySet().size() == HarryPotterBook.values().length
+        if (basket.isEmpty()) {
+            return 0;
+        }
 
         int numberOfDifferentBooks = basket.entrySet().size();
         int kemmIlSetGhaqqadna = basket.values().stream().min(Integer::compareTo).orElseThrow(() -> new RuntimeException("Int qed iddahaq??"));
 
-
-        double subtotal = 8 * numberOfDifferentBooks * kemmIlSetGhaqqadna * DISCOUNT_MAP.get(numberOfDifferentBooks);
-
+        double subtotal = 8 * numberOfDifferentBooks * kemmIlSetGhaqqadna * (1 - DISCOUNT_MAP.get(numberOfDifferentBooks));
 
         Map<HarryPotterBook, Integer> newMap = basket.entrySet()
                 .stream()
                 .map(harryPotterBookIntegerEntry -> new HashMap.SimpleEntry<>(harryPotterBookIntegerEntry.getKey(), harryPotterBookIntegerEntry.getValue() - kemmIlSetGhaqqadna))
-                .filter(harryPotterBookIntegerEntry1 -> harryPotterBookIntegerEntry1.getValue() > kemmIlSetGhaqqadna)
+                .filter(harryPotterBookIntegerEntry1 -> harryPotterBookIntegerEntry1.getValue() > 0)
                 .collect(Collectors.toMap(Map.Entry::getKey,
                         AbstractMap.SimpleEntry::getValue));
 
-        return ((8 * 5) - ((8 * 5) * .25)) + ((8 * 3) - (8 * 3) * .1);
+        Basket remainingBasket = new Basket();
+        remainingBasket.putAll(newMap);
+
+        return subtotal + buy(remainingBasket);
     }
 
     private double discountBy(double amount, double percentage) {
