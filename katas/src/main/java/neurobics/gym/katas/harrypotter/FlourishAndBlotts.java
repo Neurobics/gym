@@ -9,7 +9,7 @@ public class FlourishAndBlotts {
         if (i == 1) {
             return 8.0;
         } else if (i == 2) {
-//            return 8 * 2 - discount()
+            return discountBy(8 * 2, 0.05);
         }
         return 0;
     }
