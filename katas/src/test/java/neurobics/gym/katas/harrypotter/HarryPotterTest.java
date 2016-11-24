@@ -50,7 +50,9 @@ public class HarryPotterTest {
 
     @Test
     public void chamberOfSecrets() {
-        double actual = new FlourishAndBlotts().buy(2);
+        Basket basket = new Basket();
+        basket.put(HarryPotterBook.CHAMBER_OF_SECRETS, 2);
+        double actual = new FlourishAndBlotts().buy(basket);
         double expected = 15.2;
         Assert.assertEquals(expected, actual, 0.001);
     }

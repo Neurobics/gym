@@ -5,10 +5,10 @@ package neurobics.gym.katas.harrypotter;
  */
 public class FlourishAndBlotts {
 
-    public double buy(int i) {
-        if (i == 1) {
+    public double buy(Basket basket) {
+        if (basket == 1) {
             return 8.0;
-        } else if (i == 2) {
+        } else if (basket == 2) {
             return discountBy(8 * 2, 0.05);
         }
         return 0;
