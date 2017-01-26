@@ -1,2 +1,0 @@
-package neurobics.gym.kotlin
-
