@@ -13,7 +13,7 @@ fun tisTheBuzz(n: Int): String {
     }
 }
 
-fun Int.frubob(m: Int) = this % m == 0
+fun Int.devowel(m: Int) = this % m == 0
 
 infix fun Int.divisibleByLola(m: Int) = this % m == 0
 
