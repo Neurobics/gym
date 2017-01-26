@@ -1,16 +1,22 @@
 package neurobics.gym.kotlin
 
 fun tisTheBuzz(n: Int): String {
-
-    return when {
-        divisibleBy(n, 15) -> "fizzbuzz"
-        divisibleBy(n, 3) -> "fizz"
-        divisibleBy(n, 5) -> "buzz"
-        else -> "$n"
+    var a = frubobGenerator(n);
+    return with (n) {
+        when {
+            a(15) -> "fizzbuzz"
+            frubob(3) -> "fizz"
+            this lola 5 -> "buzz"
+            else -> "$n"
+        }
     }
 }
 
-infix fun Int.divisibleBy(m: Int) = this % m == 0
+fun Int.frubob(m: Int) = this % m == 0
+
+infix fun Int.lola(m: Int) = this % m == 0
+
+fun frubobGenerator(n: Int) = fun (m: Int) = true
 
 fun main(args: Array<String>) {
     for (i in 1..16)
