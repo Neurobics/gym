@@ -1,10 +1,11 @@
 package org.neurobics.gym
 
-import spark.Spark
 import spark.Spark.get
+import spark.Spark.port
 
 fun main(args: Array<String>) {
-    get("/hello") { req, res -> "Hello World" }
-    println(Spark.port())
+    get("/") { req, res -> "Welcome to the Neurobics gym!" }
+    get("/hello") { req, res -> "Hello ${args[0]}"}
+    println("http://localhost:" + port() + "/hello")
 }
 

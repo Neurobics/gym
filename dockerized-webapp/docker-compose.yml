@@ -1,0 +1,17 @@
+version: "2"
+services:
+
+  maria:
+    image: webapp
+    environment:
+      - name=maria-frubob
+
+  luke:
+    image: webapp
+    environment:
+      - name=maria-karen
+
+  neurobixcluster:
+    image: neurobixcluster
+    ports:
+      - 8080:8080
